@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<dockerPassword>${env.LAB_TOKEN}</dockerPassword>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -90,6 +91,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<image>
+						<name>cdelgadodata/${project.artifactId}</name>
+						<publish>true</publish>
+					</image>
+					<docker>
+						<publishRegistry>
+							<username>cdelgadodata</username>
+							<password>${dockerPassword}</password>
+						</publishRegistry>
+					</docker>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
