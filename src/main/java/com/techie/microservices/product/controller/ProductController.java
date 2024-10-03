@@ -5,11 +5,13 @@ import com.techie.microservices.product.dto.ProductResponse;
 import com.techie.microservices.product.model.Product;
 import com.techie.microservices.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -26,6 +28,8 @@ public class ProductController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProducts(){
-        return productService.getAllProducts();
+        var products = productService.getAllProducts();
+        log.info("Total Products: {}", products.size());
+        return products;
     }
 }
